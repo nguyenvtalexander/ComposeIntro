@@ -15,7 +15,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,7 +31,10 @@ class MainActivity : ComponentActivity() {
             HappyBirthdayTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    GreetingImage(message = "Happy Birthday Sam!", from = "From Emma")
+                    GreetingImage(
+                        stringResource(R.string.happy_birthday_rochelle),
+                        stringResource(R.string.from_alex)
+                    )
                 }
             }
         }
@@ -42,7 +47,10 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
     Box {
         Image(
             painter = image,
-            contentDescription = null
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.6f,
+            modifier = modifier
         )
         GreetingText(
             message = message,
@@ -72,7 +80,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
             fontSize = 36.sp,
             modifier = Modifier
                 .padding(16.dp)
-                .align(alignment = Alignment.End)
+                .align(alignment = Alignment.CenterHorizontally)
         )
     }
 }
@@ -81,6 +89,9 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingImage(message = "Happy Birthday Sam!", from ="From Emma")
+        GreetingImage(
+            stringResource(id = R.string.happy_birthday_rochelle),
+            stringResource(id = R.string.from_alex)
+        )
     }
 }
